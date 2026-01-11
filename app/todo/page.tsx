@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export type TodosType = {
   id: string;
@@ -15,27 +15,54 @@ const TodoPage = () => {
 
   console.log("todos", todos);
 
+  useEffect(() => {
+    fetch("/api/todos")
+      .then((res) => res.json())
+      .then((data) =>
+        setTodos(
+          data.map((t: any) => ({
+            id: t._id,
+            title: t.title,
+            isDone: t.isDone,
+            isEditing: false,
+          }))
+        )
+      );
+  }, []);
+
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
-  const handleOnClick = () => {
+  const handleOnClick = async () => {
     if (!inputValue.trim()) return;
 
+    const res = await fetch("/api/todos", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: inputValue }),
+    });
+
+    const newTodo = await res.json();
+
     setTodos([
-      ...todos,
       {
-        id: crypto.randomUUID(),
-        title: inputValue,
-        isDone: false,
+        id: newTodo._id,
+        title: newTodo.title,
+        isDone: newTodo.isDone,
         isEditing: false,
       },
+      ...todos,
     ]);
     setInputValue("");
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     setTodos(todos.filter((todo) => todo.id !== id));
+
+    await fetch(`/api/todos/${id}`, {
+      method: "DELETE",
+    });
   };
 
   const handleEdit = (id: string) => {
@@ -46,20 +73,30 @@ const TodoPage = () => {
     );
   };
 
-  const handleSave = (id: string, newTitle: string) => {
+  const handleSave = async (id: string, newTitle: string) => {
     setTodos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, title: newTitle, isEditing: false } : todo
       )
     );
+    await fetch(`/api/todos/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: newTitle }),
+    });
   };
 
-  const handleToggle = (id: string) => {
+  const handleToggle = async (id: string, isDone: boolean) => {
     setTodos(
       todos.map((todo) =>
-        todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
+        todo.id === id ? { ...todo, isDone: !isDone } : todo
       )
     );
+    await fetch(`/api/todos/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ isDone: !isDone }),
+    });
   };
   return (
     <>
@@ -77,7 +114,7 @@ const TodoPage = () => {
             <input
               type="checkbox"
               checked={todo.isDone}
-              onChange={() => handleToggle(todo.id)}
+              onChange={() => handleToggle(todo.id, todo.isDone)}
             />
 
             {todo.isEditing ? (
