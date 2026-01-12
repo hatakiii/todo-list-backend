@@ -9,6 +9,7 @@ export async function GET() {
     const todos = await Todo.find().sort({ createdAt: -1 });
     return NextResponse.json(todos);
   } catch (error) {
+    console.error("GET /api/todos error:", error);
     return NextResponse.json(
       { error: "Failed to fetch todos" },
       { status: 500 }
