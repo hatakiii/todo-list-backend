@@ -1,41 +1,87 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# compiled output
+dist
+tmp
+/out-tsc
+*.cursor
 # dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+node_modules
 
-# testing
-/coverage
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
 # misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
 .DS_Store
-*.pem
+Thumbs.db
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+.nx/cache
 
-# env files (can opt-in for committing if needed)
-.env*
+# Next.js
+.next
+/coverage
 
-# vercel
+# Codegen
+
+**/generated/*.tsx
+**/generated/*.ts
+**/generated/**/*.tsx
+**/generated.ts
+**/generated.tsx
+generated.ts
+generated.tsx
+**/generated
+
+#cypress
+
+**/cypress/results
+.cy
+
+# Code Coverage
+
+**/coverage/
+**/.nyc_output/
 .vercel
+.env
+.env.preview
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Terraform
+
+**/.terraform
+**/.terraform.lock.hcl
+**/.terraform.tfstate.lock.info
+**/*.tfstate
+**/*.tfstate.*
+
+**/cypress/results
+.cy
+**/cypress/downloads
+yarn.lock
+bun.lockb
+package-lock.json
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
+

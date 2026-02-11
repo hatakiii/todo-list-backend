@@ -1,0 +1,7 @@
+{
+  "eslint.validate": ["json"],
+  "files.watcherExclude": {
+    "**/target": true
+  },
+  "nxConsole.generateAiAgentRules": true,
+}
