@@ -1,0 +1,5 @@
+[NX v22.4.5 Daemon Client] - 2026-02-13T06:45:53.667Z - [FileWatcher] Socket closed, triggering reconnection
+[NX v22.4.5 Daemon Client] - 2026-02-13T06:45:53.667Z - [FileWatcher] Starting reconnection for 1 callbacks
+[NX v22.4.5 Daemon Client] - 2026-02-13T06:45:53.667Z - [Client] Waiting for server (max: 6000 attempts, 10ms interval)
+[NX v22.4.5 Daemon Client] - 2026-02-13T06:47:00.563Z - [Client] Server not available after 6000 attempts
+[NX v22.4.5 Daemon Client] - 2026-02-13T06:47:00.563Z - [FileWatcher] Failed to reconnect - server unavailable
