@@ -8,6 +8,12 @@
     },
     {
       "path": "./apps/books"
+    },
+    {
+      "path": "./apps/example/client"
+    },
+    {
+      "path": "./apps/example/server"
     }
   ]
 }
