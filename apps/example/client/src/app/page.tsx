@@ -31,7 +31,7 @@ const Page = () => {
   return (
     <Container maxWidth="xs">
       <Stack py={8} minHeight="100vh" gap={2}>
-        {data?.getBooks.map((book) => (
+        {data?.getBooks.map((book: any) => (
           <Card key={book._id} variant="outlined" sx={{ p: 2 }}>
             <Stack direction="row" alignItems="stretch">
               <Stack gap={2} flex={1}>

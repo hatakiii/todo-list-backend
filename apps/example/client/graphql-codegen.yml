@@ -1,17 +1,19 @@
 overwrite: true
-schema: '${API_URL}'
-
-documents: './apps/example/client/src/**/*.graphql'
+schema: 'http://localhost:3000/api/graphql'
+documents: 'apps/example/client/src/**/*.graphql'
 
 generates:
   apps/example/client/src/generated/index.ts:
-    config:
-      reactApolloVersion: 3
-      withHOC: true
-      withHooks: true
     plugins:
-      - add:
-          content: '// @ts-nocheck'
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-react-apollo'
+      - add:
+          content: '// @ts-nocheck'
+    config:
+      reactApolloVersion: 3
+      withHooks: true
+      withHOC: false
+      withComponent: false
+      apolloClientVersion: 3
+      useTypeImports: true
